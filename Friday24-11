@@ -1,0 +1,140 @@
+
+1. Java Program to Convert Normal Numbers to Roman Numerals:
+
+java
+import java.util.Scanner;
+
+public class RomanConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        System.out.println("Roman numeral: " + convertToRoman(number));
+    }
+
+    public static String convertToRoman(int number) {
+        if (number < 1 || number > 3999) {
+            return "Number out of range (1-3999)";
+        }
+
+        String[] romanSymbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        int[] romanValues = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+
+        while (number > 0) {
+            if (number - romanValues[i] >= 0) {
+                result.append(romanSymbols[i]);
+                number -= romanValues[i];
+            } else {
+                i++;
+            }
+        }
+
+        return result.toString();
+    }
+}
+
+////////////////////////////
+
+2. Java Program to Convert a Number to Raindrop Sounds:
+
+java
+import java.util.Scanner;
+
+public class RaindropSounds {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        System.out.println("Raindrop sounds: " + convertToRaindropSounds(number));
+    }
+
+    public static String convertToRaindropSounds(int number) {
+        StringBuilder result = new StringBuilder();
+
+        if (number % 3 == 0) {
+            result.append("Pling");
+        }
+        if (number % 5 == 0) {
+            result.append("Plang");
+        }
+        if (number % 7 == 0) {
+            result.append("Plong");
+        }
+
+        return result.length() == 0 ? String.valueOf(number) : result.toString();
+    }
+}
+
+////////////////////////////
+
+
+3. Java Program to Check if Two Strings are Anagrams:
+
+java
+import java.util.Arrays;
+
+public class AnagramChecker {
+    public static void main(String[] args) {
+        String target = "stone";
+        String[] candidates = {"stone", "tones", "banana", "tons", "notes", "Seton"};
+
+        for (String candidate : candidates) {
+            if (areAnagrams(target, candidate)) {
+                System.out.println(candidate);
+            }
+        }
+    }
+
+    public static boolean areAnagrams(String str1, String str2) {
+        char[] charArray1 = str1.toLowerCase().toCharArray();
+        char[] charArray2 = str2.toLowerCase().toCharArray();
+
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
+
+        return Arrays.equals(charArray1, charArray2);
+    }
+}
+
+
+////////////////////////////
+
+4. Java Program to Decode the Colors of a Resistance into the Value:
+
+java
+import java.util.HashMap;
+import java.util.Map;
+
+public class ResistanceDecoder {
+    public static void main(String[] args) {
+        String[] colors = {"brown", "green", "violet"};
+        System.out.println("Resistance value: " + decodeResistance(colors));
+    }
+
+    public static int decodeResistance(String[] colors) {
+        Map<String, Integer> colorValues = new HashMap<>();
+        colorValues.put("black", 0);
+        colorValues.put("brown", 1);
+        colorValues.put("red", 2);
+        colorValues.put("orange", 3);
+        colorValues.put("yellow", 4);
+        colorValues.put("green", 5);
+        colorValues.put("blue", 6);
+        colorValues.put("violet", 7);
+        colorValues.put("grey", 8);
+        colorValues.put("white", 9);
+
+        int result = 0;
+
+        for (String color : colors) {
+            if (colorValues.containsKey(color)) {
+                result = result * 10 + colorValues.get(color);
+            }
+        }
+
+        return result;
+    }
+}
